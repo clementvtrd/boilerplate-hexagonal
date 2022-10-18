@@ -20,7 +20,7 @@ doctrine:
             Model:
                 type: xml
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Domain/Model'
+                dir: '%kernel.project_dir%/src/Infrastructure/Doctrine/Mapping/Domain'
                 prefix: 'Domain\Model'
                 alias: Model
 

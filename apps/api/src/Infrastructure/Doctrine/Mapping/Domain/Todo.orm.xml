@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Domain\Model\Todo" table="todo">
+        <id name="id" type="uuid" unique="true">
+            <generator strategy="AUTO" />
+        </id>
+        <field name="task" type="string" nullable="false" />
+        <field name="done" type="boolean" />
+    </entity>
+</doctrine-mapping>
