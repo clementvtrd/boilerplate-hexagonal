@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Domain\Repository;
 
 /**
- * @extends AbstractRepository<\Domain\Model\TodoList>
+ * @implements Repository<\Domain\Model\TodoList>
  */
-abstract class TodoRepository extends AbstractRepository
+abstract class TodoRepository implements Repository
 {
 }
