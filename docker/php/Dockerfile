@@ -2,6 +2,9 @@ FROM composer:2.3.5 AS composer
 
 FROM php:8.1-fpm AS base
 
+ARG UID
+USER $UID:$UID
+
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN apt update \
@@ -16,6 +19,6 @@ RUN apt update \
 ENV PATH="$PATH:/app/bin"
 
 WORKDIR /app
-USER 1000:1000
+RUN chown -R $UID:$UID /app
 
 FROM base AS dev

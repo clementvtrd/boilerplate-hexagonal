@@ -6,7 +6,6 @@ output: 'prefixed'
 includes:
   back: ./tasks/back.yaml
   core: ./tasks/core.yaml
-  docker: ./tasks/docker.yaml
   front: ./tasks/front.yaml
 
 tasks:
@@ -15,11 +14,10 @@ tasks:
     deps:
       - install
     cmds:
-      - task: docker:start
+      - docker-compose up -d --remove-orphans
   
   install:
     desc: Install dependencies
     cmds:
-      - task: docker:build
       - task: back:install
       - task: front:install
