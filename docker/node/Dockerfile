@@ -1,6 +1,7 @@
-FROM node:16.15
+FROM node:lts
+
+ARG UID
+USER $UID:$UID
 
 WORKDIR /app
-USER 1000:1000
-
-CMD [ "yarn", "serve" ]
+RUN chown -R $UID:$UID /app

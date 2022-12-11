@@ -3,9 +3,6 @@ version: '3'
 silent: true
 output: 'prefixed'
 
-includes:
-  docker: ./docker.yaml
-
 tasks:
   install:
     desc: Install frontend dependencies
@@ -40,5 +37,5 @@ tasks:
   lint:
     desc: Enforce code style and type checking
     cmds:
-      - task: eslint
+      - docker compose run --rm node yarn eslint
       - task: typescript

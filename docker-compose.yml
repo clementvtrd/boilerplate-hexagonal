@@ -25,6 +25,7 @@ services:
   node:
     build: ./docker/node
     restart: unless-stopped
+    command: yarn serve
     env_file: ./apps/frontend/.env
     volumes:
       - ./apps/frontend:/app
