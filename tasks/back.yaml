@@ -11,6 +11,8 @@ tasks:
     sources:
       - apps/api/composer.json
       - apps/api/composer.lock
+    generates:
+      - apps/api/vendor/**/*
   
   php-cs-fixer:
     desc: Enforce code style

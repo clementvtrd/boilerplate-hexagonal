@@ -38,7 +38,7 @@ tasks:
       - docker compose run --rm node yarn tsc --noEmit
   
   lint:
-    desc: Lint files (ESLint, TypeScript)
+    desc: Enforce code style and type checking
     cmds:
       - task: eslint
       - task: typescript
