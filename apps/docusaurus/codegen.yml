@@ -1,0 +1,9 @@
+overwrite: true
+schema: https://api.app.localhost/graphql/
+
+generates:
+  src/schema.graphql:
+    plugins:
+      - schema-ast
+    config:
+      commentDescriptions: true

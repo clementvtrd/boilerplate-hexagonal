@@ -10,28 +10,29 @@ const config = {
   tagline: 'The hexagonal architecture',
   favicon: 'img/favicon.ico',
 
-  // Set the production url of your site here
   url: 'https://clementvtrd.github.io',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/boilerplate-graphql/',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'clementvtrd', // Usually your GitHub org/user name.
-  projectName: 'boilerplate-graphql', // Usually your repo name.
+  organizationName: 'clementvtrd',
+  projectName: 'boilerplate-graphql',
   deploymentBranch: 'gh-pages',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  // Even if you don't use internalization, you can use this field to set useful
-  // metadata like html lang. For example, if your site is Chinese, you may want
-  // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
   },
+
+  plugins: [
+    [
+      "docusaurus-graphql-plugin",
+      {
+        schema: "src/schema.graphql",
+      },
+    ],
+  ],
 
   presets: [
     [
