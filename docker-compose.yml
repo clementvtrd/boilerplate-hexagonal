@@ -47,6 +47,7 @@ services:
     volumes:
       - ./services/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
       - ./apps/api:/opt/app:ro
+      - composer:/.composer
     depends_on:
       - php
 
@@ -77,7 +78,6 @@ services:
     depends_on:
       database:
         condition: service_healthy
-        restart: true
 
   database:
     image: mysql:${MYSQL_VERSION}
