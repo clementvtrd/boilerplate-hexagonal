@@ -25,12 +25,11 @@ services:
     build:
       context: ./apps/web
       dockerfile: Dockerfile
-      target: base
     restart: unless-stopped
     env_file: ./apps/web/.env
     command: yarn serve
     volumes:
-      - ./apps/web:/app
+      - ./apps/web:/opt/app
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.node.tls=true"
@@ -47,18 +46,34 @@ services:
       - "traefik.http.services.nginx.loadbalancer.server.port=80"
     volumes:
       - ./services/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./apps/api:/app:ro
+      - ./apps/api:/opt/app:ro
     depends_on:
       - php
 
+  docusaurus:
+    build:
+      context: ./apps/docusaurus
+      dockerfile: Dockerfile
+    command: yarn start
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.docusaurus.tls=true"
+      - "traefik.http.routers.docusaurus.rule=Host(`docs.app.localhost`)"
+      - "traefik.http.services.docusaurus.loadbalancer.server.port=3000"
+    volumes:
+      - ./apps/docusaurus:/opt/app
+  
   php:
     build:
       context: ./apps/api
       dockerfile: Dockerfile
-      target: dev
+    restart: unless-stopped
     env_file: .env
     volumes:
       - ./apps/api:/app
+      - ./apps/api:/opt/app
+      - composer:/.composer
     depends_on:
       database:
         condition: service_healthy
@@ -66,7 +81,7 @@ services:
 
   database:
     image: mysql:${MYSQL_VERSION}
-    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
@@ -81,5 +96,8 @@ services:
       retries: 5
       start_period: 30s
 
+# Data persistence
 volumes:
-  mysql:
+  mysql:    # database
+  composer: # composer cache
+  yarn:     # yarn cache

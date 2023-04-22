@@ -1,24 +1,103 @@
 version: '3'
 
-silent: true
-
-includes:
-  back: ./tasks/back.yaml
-  core: ./tasks/core.yaml
-  docker: ./tasks/docker.yaml
-  front: ./tasks/front.yaml
-
 tasks:
   default:
     desc: Start development
     deps:
       - install
     cmds:
-      - task: docker:start
+      - task: start
+
+  start:
+    desc: Start containers
+    deps:
+      - certs
+    cmds:
+      - docker compose up --detach --remove-orphans
+
+  stop:
+    desc: Stop and remove containers
+    cmds:
+      - docker compose down
+  
+  restart:
+    desc: Restart containers
+    cmds:
+      - task: stop
+      - task: start
   
   install:
     desc: Install dependencies
     cmds:
-      - task: docker:build
-      - task: back:install
-      - task: front:install
+      - task: install-api
+      - task: install-front
+      - task: install-docs
+  
+  certs:
+    desc: Generate SSL certificates
+    cmds:
+      - mkcert -cert-file certs/local-cert.pem -key-file certs/local-key.pem "app.localhost" "*.app.localhost"
+    status:
+      - test -f certs/local-cert.pem
+      - test -f certs/local-key.pem
+  
+  install-front:
+    desc: Install frontend dependencies
+    cmds:
+      - docker compose run --rm node yarn install --pure-lockfile
+    sources:
+      - apps/web/package.json
+      - apps/web/yarn.lock
+    generates:
+      - apps/web/node_modules/**/*
+  
+  install-docs:
+    desc: Install frontend dependencies
+    cmds:
+      - docker compose run --rm docusaurus yarn install --pure-lockfile
+    sources:
+      - apps/docusaurus/package.json
+      - apps/docusaurus/yarn.lock
+    generates:
+      - apps/docusaurus/node_modules/**/*
+
+  graphql:
+    desc: Generate typed hooks
+    cmds:
+      - docker compose run --rm node yarn graphql:generate
+    generates:
+      - apps/web/src/hooks/graphql.ts
+  
+  eslint:
+    desc: Run ESLint
+    cmds:
+      - docker compose run --rm node yarn eslint --fix
+  
+  typescript:
+    desc: Check type hinting
+    cmds:
+      - docker compose run --rm node yarn tsc --noEmit
+  
+
+  install-api:
+    desc: Install backend dependencies
+    cmds:
+      - docker compose run --rm php composer install
+    sources:
+      - apps/api/composer.json
+      - apps/api/composer.lock
+  
+  php-cs-fixer:
+    desc: Enforce code style
+    cmds:
+      - docker compose run --rm php php-cs-fixer fix
+
+  phpstan:
+    desc: Static analysis
+    cmds:
+      - docker compose run --rm php phpstan analyse -c phpstan.neon
+
+  deptrac:
+    desc: Static analysis
+    cmds:
+      - docker compose run --rm php deptrac

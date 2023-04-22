@@ -1,8 +1,6 @@
-FROM composer:2.5.4 AS composer
+FROM php:8.2-fpm-alpine3.17
 
-FROM php:8.2-fpm-alpine3.17 AS base
-
-COPY --from=composer /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.5.4 /usr/bin/composer /usr/bin/composer
 
 RUN apk add --no-cache \
     autoconf \
@@ -22,9 +20,7 @@ RUN docker-php-ext-install -j"$(nproc)" \
     pdo_mysql
 RUN apk del --no-network .phpize-deps
 
-ENV PATH="$PATH:/app/bin"
+ENV PATH="$PATH:/opt/app/bin"
 
-WORKDIR /app
+WORKDIR /opt/app
 USER 1000:1000
-
-FROM base AS dev

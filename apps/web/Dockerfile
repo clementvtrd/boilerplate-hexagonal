@@ -1,4 +1,4 @@
-FROM node:18.15.0-alpine3.17 AS base
+FROM node:18.15.0-alpine3.17
 
 RUN apk add --no-cache \
   python3=~3.10 \
@@ -6,5 +6,5 @@ RUN apk add --no-cache \
   gcc=~12.2 \
   g++=~12.2
 
-WORKDIR /app
+WORKDIR /opt/app
 USER 1000:1000
