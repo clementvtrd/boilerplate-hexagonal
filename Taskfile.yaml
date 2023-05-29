@@ -1,5 +1,8 @@
 version: '3'
 
+vars:
+  DCTOOLS: docker compose -f docker-compose.tools.yml -p tools
+
 tasks:
   dev:
     desc: Build and start the Docker containers
@@ -54,3 +57,8 @@ tasks:
       - ./apps/api/composer.lock
     generates:
       - ./apps/api/vendor/**/*
+
+  cs-fix:
+    desc: Run PHP CS Fixer
+    cmds:
+      - '{{.DCTOOLS}} run --rm php-cs-fixer'

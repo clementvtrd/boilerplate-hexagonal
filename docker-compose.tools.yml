@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+
+  php: &php
+    build:
+      context: apps/api
+      dockerfile: Dockerfile
+      target: base
+    working_dir: /opt/tool
+
+  php-cs-fixer:
+    <<: *php
+    command: composer run cs-fix
+    volumes:
+      - ./apps/api:/opt/app
+      - ./tools/php-cs-fixer:/opt/tool
