@@ -1,23 +1,17 @@
 {
-    "type": "project",
-    "license": "proprietary",
-    "minimum-stability": "stable",
-    "prefer-stable": true,
-    "require": {
-        "php": ">=8.2",
-        "ext-ctype": "*",
-        "ext-iconv": "*",
-        "doctrine/doctrine-bundle": "2.9.*",
-        "doctrine/doctrine-migrations-bundle": "3.2.*",
-        "doctrine/orm": "2.15.*",
-        "overblog/graphql-bundle": "0.15.*",
-        "symfony/console": "6.2.*",
-        "symfony/flex": "2.3.*",
-        "symfony/framework-bundle": "6.2.*",
-        "symfony/proxy-manager-bridge": "6.2.*",
-        "symfony/runtime": "6.2.*",
-        "symfony/uid": "6.2.*",
-        "symfony/yaml": "6.2.*"
+    "autoload": {
+        "psr-4": {
+            "Application\\": "src/Application",
+            "Domain\\": "src/Domain",
+            "GraphQL\\Definitions\\": "var/GraphQL",
+            "Infrastructure\\": "src/Infrastructure",
+            "Migration\\": "src/Migration"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\": "spec"
+        }
     },
     "config": {
         "allow-plugins": {
@@ -31,41 +25,6 @@
         },
         "sort-packages": true
     },
-    "autoload": {
-        "psr-4": {
-            "Application\\": "src/Application",
-            "GraphQL\\Definitions\\": "var/GraphQL",
-            "Domain\\": "src/Domain",
-            "Infrastructure\\": "src/Infrastructure",
-            "Migration\\": "src/Migration"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "spec\\": "spec"
-        }
-    },
-    "replace": {
-        "symfony/polyfill-ctype": "*",
-        "symfony/polyfill-iconv": "*",
-        "symfony/polyfill-php72": "*",
-        "symfony/polyfill-php73": "*",
-        "symfony/polyfill-php74": "*",
-        "symfony/polyfill-php80": "*",
-        "symfony/polyfill-php81": "*"
-    },
-    "scripts": {
-        "auto-scripts": {
-            "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
-        },
-        "post-install-cmd": [
-            "@auto-scripts"
-        ],
-        "post-update-cmd": [
-            "@auto-scripts"
-        ]
-    },
     "conflict": {
         "symfony/symfony": "*"
     },
@@ -75,12 +34,49 @@
             "require": "6.2.*"
         }
     },
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "replace": {
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php74": "*",
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php81": "*"
+    },
+    "require": {
+        "doctrine/doctrine-bundle": "2.9.*",
+        "doctrine/doctrine-migrations-bundle": "3.2.*",
+        "doctrine/orm": "2.15.*",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "overblog/graphql-bundle": "0.15.*",
+        "php": ">=8.2",
+        "symfony/console": "6.2.*",
+        "symfony/flex": "2.3.*",
+        "symfony/framework-bundle": "6.2.*",
+        "symfony/proxy-manager-bridge": "6.2.*",
+        "symfony/runtime": "6.2.*",
+        "symfony/uid": "6.2.*",
+        "symfony/yaml": "6.2.*"
+    },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "3.*",
-        "phpspec/phpspec": "7.*",
-        "phpstan/phpstan": "1.10.*",
-        "qossmic/deptrac-shim": "1.0.*",
         "symfony/stopwatch": "6.2.*",
         "symfony/web-profiler-bundle": "6.2.*"
-    }
+    },
+    "scripts": {
+        "auto-scripts": {
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "cache:clear": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ]
+    },
+    "type": "project"
 }
