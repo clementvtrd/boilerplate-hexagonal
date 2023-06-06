@@ -7,4 +7,23 @@ RUN apk add --no-cache \
   g++=~12.2
 
 WORKDIR /app
+
+FROM base AS dev
+
+ENV NODE_ENV=development
+
+COPY package.json yarn.lock /app/
+
+CMD ["yarn", "dev"]
+
+FROM base AS release
+
+ENV NODE_ENV=production
+
+COPY . /app/
+
+RUN yarn install --pure-lockfile && yarn build
+
 USER 1000:1000
+
+CMD ["yarn", "start"]
