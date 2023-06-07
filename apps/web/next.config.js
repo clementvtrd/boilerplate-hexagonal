@@ -1,11 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    devIndicators: {
-        buildActivity: true,
-    },
-    buildActivityPosition: 'bottom-right',
-    typedRoutes: true,
-
-}
+const nextConfig = {}
 
 module.exports = nextConfig
