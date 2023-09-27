@@ -53,7 +53,7 @@
         "doctrine/orm": "2.15.*",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "overblog/graphql-bundle": "0.15.*",
+        "overblog/graphql-bundle": "1.0.*",
         "php": ">=8.2",
         "symfony/console": "6.3.*",
         "symfony/flex": "2.3.*",
