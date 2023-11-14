@@ -52,7 +52,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "2.11.*",
-        "doctrine/doctrine-migrations-bundle": "3.2.*",
+        "doctrine/doctrine-migrations-bundle": "3.3.*",
         "doctrine/orm": "2.16.*",
         "overblog/graphql-bundle": "1.0.*",
         "symfony/amqp-messenger": "6.3.*",
