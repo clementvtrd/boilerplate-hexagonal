@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Queue;
+namespace Application;
 
 use Domain\Queue\Command\CommandInterface;
 use Domain\Queue\Event\EventInterface;

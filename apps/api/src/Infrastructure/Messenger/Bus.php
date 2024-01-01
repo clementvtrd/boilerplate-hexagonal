@@ -2,7 +2,7 @@
 
 namespace Infrastructure\Messenger;
 
-use Domain\Queue\BusInterface;
+use Application\BusInterface;
 use Domain\Queue\Command\CommandInterface;
 use Domain\Queue\Event\EventInterface;
 use Domain\Queue\Query\QueryInterface;

@@ -19,7 +19,6 @@ tasks:
       - docker compose down
 
   ssl:
-    internal: true
     cmds:
       - mkcert -key-file certs/local-key.pem -cert-file certs/local-cert.pem *.app.localhost app.localhost
       - mkcert -install
@@ -28,7 +27,6 @@ tasks:
       - test -f certs/local-key.pem
 
   bootstrap:
-    internal: true
     cmds:
       - docker compose build
       - docker compose pull

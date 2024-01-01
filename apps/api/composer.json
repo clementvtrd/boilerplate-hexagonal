@@ -7,7 +7,8 @@
         "psr-4": {
             "Application\\": "src/Application",
             "Domain\\": "src/Domain",
-            "Infrastructure\\": "src/Infrastructure"
+            "Infrastructure\\": "src/Infrastructure",
+            "Tools\\": "tools"
         }
     },
     "config": {
@@ -51,6 +52,7 @@
         "symfony/messenger": "7.0.*",
         "symfony/proxy-manager-bridge": "6.4.*",
         "symfony/runtime": "7.0.*",
+        "symfony/security-bundle": "6.4.*",
         "symfony/uid": "7.0.*",
         "symfony/yaml": "7.0.*"
     },
@@ -60,7 +62,6 @@
     },
     "scripts": {
         "auto-scripts": {
-            "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "cache:clear": "symfony-cmd"
         },
         "post-install-cmd": [

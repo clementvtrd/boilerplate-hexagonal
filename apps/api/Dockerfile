@@ -27,7 +27,7 @@ COPY php.ini /usr/local/etc/php/php.ini
 
 ENV PATH="$PATH:/app/bin"
 
-WORKDIR /app
+WORKDIR /opt/app
 
 FROM base AS cli
 

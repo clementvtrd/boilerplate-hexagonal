@@ -8,3 +8,9 @@ parameters:
         - tests
         - config
         - public
+
+services:
+    -
+        class: Tools\PhpStan\QueryBusReturn
+        tags:
+        - phpstan.broker.dynamicMethodReturnTypeExtension

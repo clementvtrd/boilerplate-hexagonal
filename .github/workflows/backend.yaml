@@ -1,0 +1,37 @@
+name: Backend quality
+run-name: ${{ github.actor }} - ${{ github.pull_request.title }} (${{ github.pull_request.number }})
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+on:
+  pull_request_target:
+    paths: ['apps/api/**/*']
+  push: ~
+
+env:
+  CI: 1
+
+jobs:
+  static:
+    strategy:
+      fail-fast: false
+      matrix:
+        cmd: ['phpstan', 'deptrac', 'cs-fixer']
+    name: Static analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Task
+        uses: arduino/setup-task@v1
+
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: task composer
+        if: matrix.cmd == 'phpstan'
+
+      - name: Build ${{ matrix.cmd }} image
+        run: docker compose -f docker-compose.tools.yml build ${{ matrix.cmd }}
+
+      - name: Run ${{ matrix.cmd }}
+        run: docker compose -f docker-compose.tools.yml run --rm ${{ matrix.cmd }}

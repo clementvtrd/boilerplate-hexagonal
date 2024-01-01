@@ -1,49 +1,46 @@
 parameters:
-    paths:
-        - ./src
-        - ./vendor
+  paths:
+    - ./src
 
-    layers:
-        - name: Application
-          collectors:
-              - type: classLike
-                regex: ^Application\\.*
+  layers:
+    - name: Application
+      collectors:
+        - type: classLike
+          regex: ^Application\\.*
 
-        - name: Domain
-          collectors:
-              - type: classLike
-                regex: ^Domain\\.*
+    - name: Domain
+      collectors:
+        - type: classLike
+          regex: ^Domain\\.*
 
-        - name: Infrastructure
-          collectors:
-              - type: classLike
-                regex: ^Infrastructure\\.*
+    - name: Infrastructure
+      collectors:
+        - type: classLike
+          regex: ^Infrastructure\\.*
 
-        - name: OverblogGraphQLBundle
-          collectors:
-              - type: classLike
-                regex: ^Overblog\\GraphQLBundle\\.*
+    - name: Doctrine
+      collectors:
+        - type: classLike
+          regex: ^Doctrine\\.*
 
-        - name: Vendor
-          collectors:
-              - type: bool
-                must_not:
-                  - type: layer
-                    layer: Application
-                  - type: layer
-                    layer: Domain
-                  - type: layer
-                    layer: Infrastructure
-                  - type: layer
-                    layer: OverblogGraphQLBundle
+    - name: Symfony
+      collectors:
+        - type: classLike
+          regex: ^Symfony\\.*
 
-    ruleset:
-        Domain: ~
-        Application:
-            - +Domain
-            - OverblogGraphQLBundle
-        Infrastructure:
-            - +Application
-            - Vendor
-        OverblogGraphQLBundle:
-            - Vendor
+    - name: Overblog
+      collectors:
+        - type: classLike
+          regex: ^Overblog\\GraphQLBundle\\.*
+
+  ruleset:
+    Domain: ~
+    Application:
+      - Domain
+      - Overblog
+      - Symfony
+    Infrastructure:
+      - Application
+      - Doctrine
+      - Domain
+      - Symfony
