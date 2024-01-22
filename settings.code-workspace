@@ -5,33 +5,14 @@
     },
     {
       "path": "apps/api"
-    },
-    {
-      "path": "apps/web"
     }
   ],
-  "extensions": {
-    "recommendations": [
-      "arcanis.vscode-zipfs",
-    ]
-  },
   "settings": {
     "files.exclude": {
-      "**/.DS_Store": true,
-      "**/.git": true,
-      "**/.hg": true,
-      "**/.svn": true,
-      "**/CVS": true,
-      "**/Thumbs.db": true,
       "apps": true
     },
     "search.exclude": {
-      "**/.yarn": true,
-      "**/.pnp.*": true,
       "**/vendor": false
     },
-    "eslint.nodePath": "web/.yarn/sdks",
-    "typescript.tsdk": "web/.yarn/sdks/typescript/lib",
-    "typescript.enablePromptUseWorkspaceTsdk": true
   }
 }
