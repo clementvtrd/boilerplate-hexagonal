@@ -10,6 +10,22 @@
   "settings": {
     "files.exclude": {
       "apps": true
-    }
+    },
+    "sqltools.connections": [
+      {
+        "mysqlOptions": {
+          "authProtocol": "default",
+          "enableSsl": "Disabled"
+        },
+        "previewLimit": 50,
+        "server": "localhost",
+        "port": 3306,
+        "driver": "MySQL",
+        "name": "localhost",
+        "database": "app",
+        "username": "user",
+        "password": "password"
+      }
+    ]
   }
 }

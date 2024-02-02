@@ -1,6 +1,6 @@
 framework:
     router:
-        utf8: true
+        strict_requirements: true
 
 when@prod:
     framework:

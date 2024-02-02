@@ -1,13 +1,6 @@
 doctrine:
     dbal:
-        dbname: '%env(resolve:DATABASE_NAME)%'
-        host: '%env(resolve:DATABASE_HOST)%'
-        port: '%env(resolve:DATABASE_PORT)%'
-        user: '%env(resolve:DATABASE_USER)%'
-        password: '%env(resolve:DATABASE_PASSWORD)%'
-        charset: '%env(resolve:DATABASE_CHARSET)%'
-        server_version: '%env(resolve:DATABASE_VERSION)%'
-        driver: pdo_mysql
+        url: '%env(resolve:DATABASE_URL)%'
         profiling_collect_backtrace: '%kernel.debug%'
     orm:
         auto_generate_proxy_classes: true
@@ -17,16 +10,17 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            Model:
-                type: xml
+            App:
+                type: attribute
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Infrastructure/Doctrine/ORM/Model'
-                prefix: 'Domain\Model'
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'App\Entity'
+                alias: App
 
 when@test:
     doctrine:
         dbal:
-            dbname_suffix: '_test'
+            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
 
 when@prod:
     doctrine:
